@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+/* ---- Design tokens (from Stitch "Play Place Homepage") ---- */
+@theme {
+  --font-sans: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: #f7f9ff;
+  --color-surface: #f7f9ff;
+  --color-surface-variant: #d1e4fb;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #edf4ff;
+  --color-surface-container: #e3efff;
+
+  --color-on-background: #091d2e;
+  --color-on-surface: #091d2e;
+  --color-on-surface-variant: #56423c;
+
+  --color-primary: #9f4122;
+  --color-primary-dark: #7f2a0d;
+  --color-primary-container: #ff8a65;
+  --color-on-primary-container: #752305;
+
+  --color-secondary: #686000;
+  --color-secondary-container: #f0e269;
+  --color-secondary-fixed: #f3e56c;
+
+  --color-tertiary: #286b33;
+  --color-tertiary-container: #75ba78;
+
+  --color-outline-variant: #ddc0b8;
+}
+
+/* ---- Base ---- */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+  user-select: none;
+}
+
+/* ---- Component styles carried over from the Stitch design ---- */
+.bouncy-button {
+  transition: transform 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.18s ease;
+  box-shadow: 0 4px 0 var(--color-primary-dark);
+}
+.bouncy-button:hover {
+  transform: translateY(-2px);
+}
+.bouncy-button:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--color-primary-dark);
+}
+
+.cloud-card {
+  border: 2px solid var(--color-surface-variant);
+  box-shadow: 0 10px 25px -5px rgba(159, 65, 34, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.cloud-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 34px -8px rgba(159, 65, 34, 0.16);
+}
+
+.glass-nav {
+  backdrop-filter: blur(12px);
+  background: rgba(247, 249, 255, 0.9);
+}
+
+.gallery-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 6%,
+    black 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 6%,
+    black 94%,
+    transparent
+  );
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ---- Minimal animations ---- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+/* Scroll-reveal: hidden until .is-visible is added by the observer */
+.reveal {
+  opacity: 0;
+}
+.reveal.is-visible {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-float {
+  animation: float-slow 6s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation: float-slow 7s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+.animate-wiggle {
+  animation: wiggle 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible,
+  .animate-float,
+  .animate-float-delayed,
+  .animate-wiggle {
+    animation: none;
+    opacity: 1;
+  }
+}
