@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Home from "../pages/public/Home";
 import About from "../pages/public/About";
+import Admissions from "../pages/public/Admissions";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -18,6 +19,7 @@ export default function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/admissions" element={<Admissions />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>

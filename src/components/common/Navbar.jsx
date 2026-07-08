@@ -8,7 +8,7 @@ const LOGO =
 const LINKS = [
   { label: "Home", to: "/" },
   { label: "About", to: "/about" },
-  { label: "Admissions", to: null },
+  { label: "Admissions", to: "/admissions" },
   { label: "Academics", to: null },
   { label: "Gallery", to: null },
   { label: "Contact", to: null },

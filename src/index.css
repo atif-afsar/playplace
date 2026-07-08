@@ -18,6 +18,7 @@
   --color-primary: #9f4122;
   --color-primary-dark: #7f2a0d;
   --color-primary-container: #ff8a65;
+  --color-primary-fixed: #ffdbd0;
   --color-on-primary-container: #752305;
 
   --color-secondary: #686000;
@@ -28,6 +29,7 @@
   --color-tertiary-container: #75ba78;
 
   --color-outline-variant: #ddc0b8;
+  --color-outline: #89726b;
 }
 
 /* ---- Base ---- */
@@ -148,12 +150,34 @@ body {
   transform-origin: center;
 }
 
+@keyframes morph {
+  0% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+}
+
+.bubble-shape {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: morph 8s ease-in-out infinite;
+}
+
+.form-input {
+  @apply rounded-2xl border-2 border-outline-variant p-4 text-base font-medium outline-none transition-colors focus:border-secondary;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .reveal.is-visible,
   .animate-float,
   .animate-float-delayed,
-  .animate-wiggle {
+  .animate-wiggle,
+  .bubble-shape {
     animation: none;
     opacity: 1;
   }
