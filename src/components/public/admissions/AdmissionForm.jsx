@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Reveal from "../../common/Reveal";
+import { supabase, isSupabaseConfigured } from "../../../lib/supabaseClient";
+import { useAuth } from "../../../context/AuthContext";
 
 const CLASSES = ["Nursery", "LKG", "UKG", "Pre-K", "Kindergarten", "Grade 1", "Grade 2"];
 
@@ -15,11 +17,24 @@ const EMPTY = {
 };
 
 export default function AdmissionForm() {
+  const { user, profile } = useAuth();
   const [form, setForm] = useState(EMPTY);
   const [photo, setPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+
+  // Prefill parent details when logged in, so an approved application links
+  // straight back to the parent's account (matched by email).
+  useEffect(() => {
+    if (!user) return;
+    setForm((f) => ({
+      ...f,
+      email: f.email || user.email || "",
+      parentName: f.parentName || profile?.full_name || "",
+    }));
+  }, [user, profile]);
 
   const set = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
@@ -32,10 +47,49 @@ export default function AdmissionForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
     setSubmitting(true);
-    // Placeholder until Supabase is wired — simulates a successful submit
-    await new Promise((r) => setTimeout(r, 900));
+
+    if (!isSupabaseConfigured) {
+      setSubmitting(false);
+      setError(
+        "The application system isn't connected yet. Please try again later or contact the school."
+      );
+      return;
+    }
+
+    let photoUrl = null;
+    if (photo) {
+      const ext = photo.name.split(".").pop();
+      const path = `applications/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+      const { error: uploadError } = await supabase.storage
+        .from("admissions")
+        .upload(path, photo, { upsert: false });
+      if (!uploadError) {
+        const { data } = supabase.storage.from("admissions").getPublicUrl(path);
+        photoUrl = data?.publicUrl ?? null;
+      }
+      // A failed photo upload (e.g. bucket not created yet) shouldn't block the application.
+    }
+
+    const { error: insertError } = await supabase.from("admissions").insert({
+      child_name: form.childName,
+      dob: form.dob || null,
+      gender: form.gender,
+      class_applied: form.classApplied,
+      parent_name: form.parentName,
+      phone: form.phone,
+      email: form.email,
+      address: form.address,
+      photo_url: photoUrl,
+      status: "pending",
+    });
+
     setSubmitting(false);
+    if (insertError) {
+      setError(insertError.message || "Something went wrong. Please try again.");
+      return;
+    }
     setSubmitted(true);
   };
 
@@ -56,6 +110,7 @@ export default function AdmissionForm() {
               setForm(EMPTY);
               setPhoto(null);
               setPhotoPreview(null);
+              setError("");
             }}
             className="bouncy-button mt-8 rounded-full bg-primary px-8 py-3 text-sm font-bold text-white"
           >
@@ -266,6 +321,11 @@ export default function AdmissionForm() {
             >
               {submitting ? "Submitting…" : "Submit Application"}
             </button>
+            {error && (
+              <p className="mt-4 rounded-2xl bg-error-container px-4 py-3 text-center text-sm font-medium text-on-error-container">
+                {error}
+              </p>
+            )}
             <p className="mt-4 text-center text-sm font-bold text-outline">
               By submitting, you agree to our{" "}
               <a href="#" className="underline">

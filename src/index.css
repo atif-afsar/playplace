@@ -34,6 +34,21 @@
 
   --color-tertiary: #286b33;
   --color-tertiary-container: #75ba78;
+  --color-tertiary-fixed: #abf4ac;
+  --color-tertiary-fixed-dim: #90d792;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-fixed: #002107;
+  --color-on-tertiary-fixed-variant: #07521d;
+
+  --color-on-primary: #ffffff;
+  --color-on-primary-fixed: #3a0b00;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-fixed: #1f1c00;
+
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
 
   --color-outline-variant: #ddc0b8;
   --color-outline: #89726b;
@@ -182,8 +197,16 @@ body {
   animation: morph 8s ease-in-out infinite;
 }
 
-.form-input {
-  @apply rounded-2xl border-2 border-outline-variant p-4 text-base font-medium outline-none transition-colors focus:border-secondary;
+@layer components {
+  .form-input {
+    @apply rounded-2xl border-2 border-outline-variant p-4 text-base font-medium text-on-background outline-none transition-colors focus:border-secondary;
+  }
+}
+
+.form-input::placeholder {
+  color: var(--color-outline);
+  opacity: 1;
+  font-weight: 500;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -209,6 +232,8 @@ body {
   }
 }
 
+/* Gallery */
+.lightbox-bg {
   backdrop-filter: blur(12px);
   background-color: rgba(9, 29, 46, 0.6);
 }

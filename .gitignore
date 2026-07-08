@@ -15,6 +15,11 @@ dist-ssr
 # MCP config (contains secret API keys)
 .cursor/mcp.json
 
+# Environment variables (Supabase keys, etc.)
+.env
+.env.local
+.env.*.local
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
