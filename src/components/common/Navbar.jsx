@@ -9,10 +9,10 @@ const LINKS = [
   { label: "Home", to: "/" },
   { label: "About", to: "/about" },
   { label: "Admissions", to: "/admissions" },
-  { label: "Academics", to: null },
-  { label: "Gallery", to: null },
-  { label: "Contact", to: null },
-  { label: "Login", to: null },
+  { label: "Academics", to: "/academics" },
+  { label: "Gallery", to: "/gallery" },
+  { label: "Contact", to: "/contact" },
+  { label: "Login", to: "/login" },
 ];
 
 const base = "text-sm font-bold transition-colors";

@@ -10,10 +10,15 @@
   --color-surface-container-lowest: #ffffff;
   --color-surface-container-low: #edf4ff;
   --color-surface-container: #e3efff;
+  --color-surface-container-high: #d9eaff;
+  --color-surface-container-highest: #d1e4fb;
+  --color-surface-dim: #c9dcf3;
 
+  --font-display: "Fredoka", "Nunito Sans", ui-sans-serif, sans-serif;
   --color-on-background: #091d2e;
   --color-on-surface: #091d2e;
   --color-on-surface-variant: #56423c;
+  --color-on-tertiary-container: #004a18;
 
   --color-primary: #9f4122;
   --color-primary-dark: #7f2a0d;
@@ -24,6 +29,8 @@
   --color-secondary: #686000;
   --color-secondary-container: #f0e269;
   --color-secondary-fixed: #f3e56c;
+  --color-secondary-fixed-dim: #d6c953;
+  --color-on-secondary-container: #6d6400;
 
   --color-tertiary: #286b33;
   --color-tertiary-container: #75ba78;
@@ -66,6 +73,14 @@ body {
 .cloud-card:hover {
   transform: translateY(-6px) scale(1.02);
   box-shadow: 0 18px 34px -8px rgba(159, 65, 34, 0.16);
+}
+
+.card-glow {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-glow:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(163, 222, 254, 0.4);
 }
 
 .glass-nav {
@@ -177,8 +192,61 @@ body {
   .animate-float,
   .animate-float-delayed,
   .animate-wiggle,
-  .bubble-shape {
+  .bubble-shape,
+  .floating-envelope,
+  .login-cloud {
     animation: none;
     opacity: 1;
   }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+  backdrop-filter: blur(12px);
+  background-color: rgba(9, 29, 46, 0.6);
+}
+.image-zoom:hover img {
+  transform: scale(1.1);
+}
+
+/* Contact */
+.floating-envelope {
+  animation: float-envelope 3s ease-in-out infinite;
+}
+@keyframes float-envelope {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+}
+
+/* Login clouds */
+.login-cloud {
+  position: absolute;
+  border-radius: 50px;
+  background: white;
+  opacity: 0.6;
+  animation: cloud-drift 20s linear infinite;
+}
+@keyframes cloud-drift {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
 }
