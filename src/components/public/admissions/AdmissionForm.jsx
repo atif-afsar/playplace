@@ -3,6 +3,7 @@ import Reveal from "../../common/Reveal";
 import { supabase, isSupabaseConfigured } from "../../../lib/supabaseClient";
 import { useAuth } from "../../../context/AuthContext";
 import { CLASS_OPTIONS } from "../../../lib/constants";
+import { sendAdmissionNotification } from "../../../lib/sendAdmissionEmail";
 
 const EMPTY = {
   childName: "",
@@ -84,11 +85,30 @@ export default function AdmissionForm() {
       status: "pending",
     });
 
-    setSubmitting(false);
     if (insertError) {
+      setSubmitting(false);
       setError(insertError.message || "Something went wrong. Please try again.");
       return;
     }
+
+    try {
+      await sendAdmissionNotification({
+        childName: form.childName,
+        dob: form.dob,
+        gender: form.gender,
+        classApplied: form.classApplied,
+        parentName: form.parentName,
+        phone: form.phone,
+        email: form.email,
+        address: form.address,
+        photoUrl,
+      });
+    } catch (emailErr) {
+      // Application is saved in admin panel even if email fails.
+      console.warn("Admission email notification failed:", emailErr);
+    }
+
+    setSubmitting(false);
     setSubmitted(true);
   };
 

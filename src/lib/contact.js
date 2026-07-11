@@ -7,7 +7,7 @@ export const SCHOOL_CONTACT = {
       return [...this.lines, this.city].join(" ");
     },
   },
-  email: "ppischool@gmail.com",
+  email: "playplaceinternationalschool4@gmail.com",
   emailHint: "Email us your query",
   phones: ["+91 7302988040", "+91 7302988041"],
   hours: "Monday to Saturday, 10 AM to 5PM (IST)",

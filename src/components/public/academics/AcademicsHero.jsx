@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import Reveal from "../../common/Reveal";
+import { SCHOOL_CONTACT, telHref } from "../../../lib/contact";
 
 const CLASSROOM_IMG =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuApssEnDGRewJik-Tywgm8ToSuntdhtJQY5tJHkrU-kCSBPj-nVfKsmB-MZCgunsiqkaXmnhMk-ozcwv2qxc7gfghO33wDjo94EAixbXRPdxbY926UL9JFpmZnrT98_5fj0DfYNIQxPMIO0V9ZQCmAKFzXWx-bKw8gcsXKryBPAGWBO4LqvN08YzOlBnS6arzjYddx2ilNd5rxObzqZCGsSAhT0-3zQRo8zCa1qEn1M-Z20KYB-a3kY";
@@ -23,18 +25,19 @@ export default function AcademicsHero() {
             strong academic foundation through love and laughter.
           </p>
           <div className="flex flex-wrap gap-4">
-            <button
-              type="button"
+            <Link
+              to="/admissions#apply-form"
               className="bouncy-button rounded-full bg-primary px-8 py-3 text-sm font-bold text-white transition-transform hover:scale-105"
             >
-              View Curriculum
-            </button>
-            <button
-              type="button"
-              className="bouncy-button rounded-full border-2 border-primary bg-white px-8 py-3 text-sm font-bold text-primary transition-transform hover:scale-105"
+              Apply
+            </Link>
+            <a
+              href={telHref(SCHOOL_CONTACT.phones[0])}
+              className="bouncy-button inline-flex items-center gap-2 rounded-full border-2 border-primary bg-white px-8 py-3 text-sm font-bold text-primary transition-transform hover:scale-105"
             >
-              Book a Visit
-            </button>
+              <span className="material-symbols-outlined text-lg">call</span>
+              Book a Visit · {SCHOOL_CONTACT.phones[0]}
+            </a>
           </div>
         </Reveal>
 
