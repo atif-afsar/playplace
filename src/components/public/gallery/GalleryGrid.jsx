@@ -1,66 +1,26 @@
 import { useEffect, useMemo, useState } from "react";
 import Reveal from "../../common/Reveal";
+import { GALLERY_IMAGES } from "../../../lib/galleryImages";
 
 const FILTERS = ["All", "Events", "Sports Day", "Annual Function", "Classroom"];
 
-const ITEMS = [
-  {
-    id: 1,
-    title: "Finger Painting Fun",
-    category: "Classroom",
-    filter: "Classroom",
-    badge: "bg-tertiary-container text-on-tertiary-container",
-    src: "https://lh3.googleusercontent.com/aida-public/AB6AXuDiCE3gzqf6hLe0IQX_CH4hzcOw9Xfu0CquL_FA5VfEtPAsHl2iqUpOTjDyhfrrmAxB27fbbtgaaykSftLs0ggefEXiUSe3KEifVsPgqspMKhakpCsIygTuxbAgSB99E3FKLvzngyIOeS_TV6BRDxo6uyT4zrJT8UBl2j9G1-IY_Y2RpzbrsAYU8bmKoZoCIgYhrmzLisDC3Rb-Tm9eUXnkkzXU1KN2hj7Ha0C_q8TD_r8r58sRnSes",
-  },
-  {
-    id: 2,
-    title: "Little Champions",
-    category: "Sports Day",
-    filter: "Sports Day",
-    badge: "bg-primary-container text-on-primary-container",
-    src: "https://lh3.googleusercontent.com/aida-public/AB6AXuDIZ7LIrgbnCOirzeGpqViz42rY2j_TDpVE3i2d_zn61DP-bh62IE3qltza32y6myBGrKqZ68u333HbXhyFGmMUGS_j9dx_nzBnMgffP7sZvipbhAwQ-5nJesgV7btnZsYu4s0tyE7-ocR4A0VFembN2bgf8Mnh60PRVflXZbD3P6atOdKZppz7CZxweqGElsKdlvHaH_Yq5k20JV4KEHHxKAxCeYpxFF9HnrLIMfm9a4xBjn7YwWl8",
-  },
-  {
-    id: 3,
-    title: "Annual Concert",
-    category: "Events",
-    filter: "Events",
-    badge: "bg-secondary-container text-on-secondary-container",
-    src: "https://lh3.googleusercontent.com/aida-public/AB6AXuCN2p3MfQ6th8hZpLXWDD750TcIXd8HjoPtJCKzU4OAK-3gtw6EMBC68Nhp7DCI33p4ZoglZ8VsAARuskocMcHkYgh9W5T4RXMCjN1ajLv18kKuJHqgzJBo-XRt1K1NIg0WyVs5VXFE5MS9ouLKxzPPR-pYTkDDlDiTaId37gxbJTh214f6tA16gbqGgaTVpciR8p2ulEG0ma5Moq5LkqioAUQde_NLOMNkaPiPeKwY3JgSATFHOf2J",
-  },
-  {
-    id: 4,
-    title: "Library Time",
-    category: "Classroom",
-    filter: "Classroom",
-    badge: "bg-tertiary-container text-on-tertiary-container",
-    src: "https://lh3.googleusercontent.com/aida-public/AB6AXuBsh15P2yrTOgyE-zeMnDCu1gnMILjdN0i-D3mM2yIqOXdtbbgcR_FFKO3XFsaUUUByIcnlnPYFG1-IStM5y6Ra66hJ18Iw6KbNIiMFY2dBrxq5gFb666EyEsy_m96gVt_MzQgkO_kCfXEqW2CHzvXWQNteX91FJEZz_XrGX_XxclbzYWBj4yP_UqkpDX7Qy7QoNnxL6HtnI5ngXzNGdWO3qDDoltrT0d1GqG2z79eTYqXzcU6mY5lX",
-  },
-  {
-    id: 5,
-    title: "Block Builders",
-    category: "Classroom",
-    filter: "Classroom",
-    badge: "bg-primary-container text-on-primary-container",
-    src: "https://lh3.googleusercontent.com/aida-public/AB6AXuAlNxxbkkR445XJTbywilzjcUtfkqOQeJEo9SFD91ZLo7snI5hVmHF7EFEVjzoCwcIGij0p4sQGr20Z2PvNti0vQDCnop563_kqh6-Yk34gKbZTigtLsNS-2xrXpIDYPwlXLnxLYlIiuAACZttvmmyPOIYG_b5AB7rdBVa7aaRp8Rev_lj83E8CCh2TCOcAGYDG5GftYsgmhdFo43XFulhuiSwe8PtUre_n7MCs-LPIypm8AhZ_DD81",
-  },
-  {
-    id: 6,
-    title: "Science Explorers",
-    category: "Events",
-    filter: "Events",
-    badge: "bg-secondary-container text-on-secondary-container",
-    src: "https://lh3.googleusercontent.com/aida-public/AB6AXuCVYSDMrd2UsRhO06-hKTU2tiAEPBYv6ErRzvlRv3Y_Z92LflRAc8OAyNaTiGjCR6X33kR3o-CNPVIicYXy3yNWnikd_RJU41L5ubZJP4l4mGxVN8wOVv8BoR3hqqfRPPs1Hvyumr4UgBPIIjve769DOxdI4qii4M9ejIMAB6qUc2GMq2dT_xAlV93XqPmjhft7cpyraJb3gJYSLzbPpRjasRqpPAMNdo-MHH609eZ8hgmGZly81nbe",
-  },
-  {
-    id: 7,
-    title: "Annual Day Parade",
-    category: "Annual Function",
-    filter: "Annual Function",
-    badge: "bg-primary-container text-on-primary-container",
-    src: "https://lh3.googleusercontent.com/aida-public/AB6AXuCLDGQNMtW47quIvepdx-bLcZ7vCcovnF9ywMD7id8Kj_JQVg-5R9J6-BylZ69kiij19PfUbO3ymNJyLmaJG3HCxqMbEm6lpgdZCD_zyN7Vwq2KlQv8SZNw1OGwyaZDzbLFCLBJkxIwZR44Wvp9Q4N1Kz2vbgpTJjEjuqPX0A6O-jdD6eQnqmt_arLHstRrwzYAZYOZrQIwwz8j2jOU8PMnVLyOik4JXjhKXmL-BYOFOq_Mja2ZOaR0",
-  },
+const BADGES = [
+  "bg-tertiary-container text-on-tertiary-container",
+  "bg-primary-container text-on-primary-container",
+  "bg-secondary-container text-on-secondary-container",
 ];
+
+const CATEGORIES = ["Classroom", "Events", "Sports Day", "Annual Function"];
+
+const ITEMS = GALLERY_IMAGES.map((img, i) => ({
+  id: img.id,
+  title: img.title,
+  category: CATEGORIES[i % CATEGORIES.length],
+  filter: CATEGORIES[i % CATEGORIES.length],
+  badge: BADGES[i % BADGES.length],
+  src: img.src,
+  alt: img.alt,
+}));
 
 export default function GalleryGrid() {
   const [active, setActive] = useState("All");
@@ -122,7 +82,8 @@ export default function GalleryGrid() {
               <div className="aspect-[4/3] overflow-hidden rounded-xl bg-surface-container">
                 <img
                   src={item.src}
-                  alt={item.title}
+                  alt={item.alt ?? item.title}
+                  loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-500"
                 />
               </div>
