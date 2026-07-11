@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import { supabase } from "../../../lib/supabaseClient";
 
-const LOGO =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuAvKSuIuDCT5yEAu8dKAYZKC0RxJq4k5vXA1t3Yf8Z1Ogv1AlQmnwoRsJXbzave4hlpgMFjtBkesaI0m89YqOBkBqHTzo_lYABi7r0XBRS3CTwSxVv7X5eevtGPJi_6n049Ce_UY3UnJ6t3wm1Kfv8S1R2BgCADmFTWzPPnFFy6wwkvMmNWUmLTvfV_ovV2deL9LlFVw0Enerh1O9fKZwwf1YbohWTjVXqzKiFRTPpz13iW_XMNSV6TDCNL9s8TzLR4Bw";
+const LOGO = "/favicon.png";
 
 export default function LoginCard() {
   const { signIn, signUp, isConfigured } = useAuth();

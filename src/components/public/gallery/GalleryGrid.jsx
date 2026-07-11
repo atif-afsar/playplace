@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import Reveal from "../../common/Reveal";
+import OptimizedImage from "../../common/OptimizedImage";
 import { GALLERY_IMAGES } from "../../../lib/galleryImages";
 
 const FILTERS = ["All", "Events", "Sports Day", "Annual Function", "Classroom"];
@@ -80,10 +81,9 @@ export default function GalleryGrid() {
               onClick={() => setLightbox(item.id)}
             >
               <div className="aspect-[4/3] overflow-hidden rounded-xl bg-surface-container">
-                <img
+                <OptimizedImage
                   src={item.src}
                   alt={item.alt ?? item.title}
-                  loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-500"
                 />
               </div>
@@ -133,7 +133,7 @@ export default function GalleryGrid() {
           </button>
           <div className="relative max-w-5xl w-full" onClick={(e) => e.stopPropagation()}>
             <div className="rounded-[1.5rem] border-8 border-white bg-white p-6 shadow-2xl">
-              <img src={current.src} alt={current.title} className="w-full rounded-xl" />
+              <OptimizedImage src={current.src} alt={current.title} className="w-full rounded-xl" />
               <div className="mt-6 flex items-center justify-between">
                 <h2 className="font-display text-3xl font-extrabold text-on-surface">
                   {current.title}

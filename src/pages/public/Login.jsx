@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import LoginIllustration from "../../components/public/login/LoginIllustration";
 import LoginCard from "../../components/public/login/LoginCard";
+import SEO from "../../components/common/SEO";
 import { CREDITS } from "../../lib/contact";
+import { PAGE_SEO } from "../../lib/seo";
 
 const CLOUDS = [
   { w: 128, h: 48, top: 40, delay: -2 },
@@ -13,6 +15,7 @@ const CLOUDS = [
 export default function Login() {
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-x-hidden bg-surface-container-low p-4">
+      <SEO {...PAGE_SEO.login} />
       <Link
         to="/"
         className="absolute left-6 top-6 z-20 flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-bold text-primary shadow-sm backdrop-blur-sm transition-transform hover:scale-105"

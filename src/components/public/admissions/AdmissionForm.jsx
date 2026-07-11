@@ -114,7 +114,7 @@ export default function AdmissionForm() {
 
   if (submitted) {
     return (
-      <section id="apply-form" className="mx-auto max-w-3xl px-6 py-16 md:py-24">
+      <section id="apply-form" className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 md:py-24">
         <Reveal className="cloud-card rounded-[2.5rem] bg-white p-12 text-center">
           <span className="material-symbols-outlined mb-4 text-6xl text-tertiary">celebration</span>
           <h2 className="mb-3 text-3xl font-extrabold text-on-surface">Application Received!</h2>
@@ -141,7 +141,7 @@ export default function AdmissionForm() {
   }
 
   return (
-    <section id="apply-form" className="mx-auto max-w-3xl px-6 py-16 md:py-24">
+    <section id="apply-form" className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16 md:py-24">
       <Reveal className="mb-12 text-center">
         <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary-fixed/30 px-4 py-2 text-sm font-bold text-primary">
           <span className="material-symbols-outlined text-sm">edit_note</span>

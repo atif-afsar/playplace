@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import { CONTACT_CARDS, CREDITS, SCHOOL_CONTACT, telHref } from "../../lib/contact";
 
-const LOGO =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuDjB5qcEkej6-ufuFW8FTp7ApKtFY3e-CMNQtExTNf9p2oKmqH30T8_ft3s0TX6oXQ_dh9ei-P-pYKqMbuNXAhlRYHdWJ5fy6NKxObjieuZLut98FhNKbnFmJvOx4ybOajqWggX6uKGhXkR7n9o_a-UREjqLUHuYzlngduZBUkWwBN6G_xzB-4oZo56t9JsnzgUd8ePza7QRpuErS4R8pCBlADbKtOvf9koipc_ET3ZgD6KzsuYEiMjhClDBq4lUZw4WA";
+const LOGO = "/favicon.png";
 
 const COLUMNS = [
   {
@@ -40,11 +39,11 @@ const QUICK_ACTIONS = [
 export default function Footer() {
   return (
     <>
-      <footer className="w-full rounded-t-3xl bg-on-background px-6 py-16 text-surface-variant/80 md:px-16">
-        <div className="mx-auto flex max-w-[1200px] flex-col justify-between gap-12 lg:flex-row">
-          <div className="max-w-md space-y-6">
+      <footer className="w-full rounded-t-3xl bg-on-background px-4 py-12 text-surface-variant/80 sm:px-6 md:px-16 md:py-16">
+        <div className="mx-auto flex max-w-[1200px] flex-col justify-between gap-10 lg:flex-row lg:gap-12">
+          <div className="w-full max-w-md space-y-5">
             <div className="flex items-center gap-2">
-              <img src={LOGO} alt="Play Place" className="h-8 w-auto brightness-200" />
+              <img src={LOGO} alt="Play Place International School" className="h-8 w-auto brightness-200" width="32" height="32" loading="lazy" decoding="async" />
               <span className="text-2xl font-extrabold text-surface">Play Place</span>
             </div>
 
@@ -63,7 +62,7 @@ export default function Footer() {
                       <a
                         href={item.href}
                         {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                        className="block font-bold text-primary-container transition-colors hover:text-primary"
+                        className="block break-all text-sm font-bold text-primary-container transition-colors hover:text-primary sm:text-base"
                       >
                         {item.title}
                       </a>
@@ -118,7 +117,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 md:grid-cols-3 md:gap-14">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-10">
             {COLUMNS.map((col) => (
               <div key={col.title} className="space-y-4">
                 <h4 className="text-sm font-bold text-secondary-fixed">{col.title}</h4>

@@ -29,9 +29,9 @@ const FEATURES = [
 
 export default function Features() {
   return (
-    <section className="mx-auto max-w-[1200px] px-6 py-16 md:py-24">
+    <section className="mx-auto max-w-[1200px] px-4 py-12 md:px-6 md:py-24">
       <Reveal className="mb-14 space-y-4 text-center">
-        <h2 className="text-3xl font-extrabold text-on-background">Our Happy Little World</h2>
+        <h2 className="text-2xl font-extrabold text-on-background sm:text-3xl">Our Happy Little World</h2>
         <div className="mx-auto h-2 w-24 rounded-full bg-secondary-container" />
       </Reveal>
 
@@ -40,7 +40,7 @@ export default function Features() {
           <Reveal
             key={f.title}
             delay={i * 120}
-            className="cloud-card flex flex-col items-center space-y-6 rounded-3xl bg-surface-container-lowest p-8 text-center"
+            className="cloud-card flex flex-col items-center space-y-5 rounded-3xl bg-surface-container-lowest p-6 text-center sm:space-y-6 sm:p-8"
           >
             <div
               className={`flex h-24 w-24 items-center justify-center rounded-full ${f.ring}`}

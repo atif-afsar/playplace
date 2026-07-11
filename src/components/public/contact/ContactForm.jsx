@@ -1,21 +1,35 @@
 import { useState } from "react";
 import Reveal from "../../common/Reveal";
+import { sendContactMessage } from "../../../lib/sendAdmissionEmail";
 
 const EMPTY = { name: "", email: "", phone: "", message: "" };
 
 export default function ContactForm() {
   const [form, setForm] = useState(EMPTY);
-  const [status, setStatus] = useState("idle");
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [error, setError] = useState("");
 
   const set = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
     setStatus("sending");
-    await new Promise((r) => setTimeout(r, 1200));
-    setStatus("sent");
-    setForm(EMPTY);
-    setTimeout(() => setStatus("idle"), 3000);
+
+    try {
+      await sendContactMessage({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim(),
+        message: form.message.trim(),
+      });
+      setStatus("sent");
+      setForm(EMPTY);
+      setTimeout(() => setStatus("idle"), 4000);
+    } catch (err) {
+      setStatus("error");
+      setError(err.message || "Something went wrong. Please try again or call us directly.");
+    }
   };
 
   return (
@@ -83,7 +97,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className={`bouncy-button flex w-full items-center justify-center gap-3 rounded-full py-5 text-xl font-black uppercase tracking-wider transition-colors ${
+          className={`bouncy-button flex w-full items-center justify-center gap-3 rounded-full py-5 text-xl font-black uppercase tracking-wider transition-colors disabled:opacity-70 ${
             status === "sent"
               ? "bg-tertiary-container text-white"
               : "bg-primary-container text-on-primary-container"
@@ -92,13 +106,18 @@ export default function ContactForm() {
         >
           {status === "sending" && "Sending…"}
           {status === "sent" && "Sent Successfully! 🎉"}
-          {status === "idle" && (
+          {(status === "idle" || status === "error") && (
             <>
               Send Message
               <span className="material-symbols-outlined">send</span>
             </>
           )}
         </button>
+        {error && (
+          <p className="rounded-2xl bg-error-container px-4 py-3 text-center text-sm font-medium text-on-error-container">
+            {error}
+          </p>
+        )}
       </form>
     </Reveal>
   );

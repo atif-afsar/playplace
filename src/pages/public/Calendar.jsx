@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import Navbar from "../../components/common/Navbar";
 import Footer from "../../components/common/Footer";
+import SEO from "../../components/common/SEO";
 import YearCalendarView from "../../components/calendar/YearCalendarView";
 import { supabase, isSupabaseConfigured } from "../../lib/supabaseClient";
 import { getSchoolYear, schoolYearLabel, schoolYearOptions } from "../../lib/calendar";
+import { PAGE_SEO } from "../../lib/seo";
 
 export default function Calendar() {
+  const seo = PAGE_SEO.calendar;
   const [schoolYear, setSchoolYear] = useState(getSchoolYear());
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,7 +37,14 @@ export default function Calendar() {
   }, [schoolYear]);
 
   return (
-    <div className="min-h-screen bg-background text-on-background">
+    <div className="min-h-screen overflow-x-hidden bg-background text-on-background">
+      <SEO
+        {...seo}
+        breadcrumb={[
+          { name: "Home", path: "/" },
+          { name: "Calendar", path: "/calendar" },
+        ]}
+      />
       <Navbar />
       <main>
         <section className="relative overflow-hidden bg-gradient-to-br from-primary-container/30 via-background to-secondary-container/20 px-6 py-16 md:py-24">

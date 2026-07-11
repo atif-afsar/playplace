@@ -7,7 +7,13 @@ export default function Hero() {
   return (
     <section className="relative flex min-h-[600px] items-center justify-center overflow-hidden bg-surface-variant/20 md:min-h-[760px]">
       <div className="absolute inset-0 z-0">
-        <img src={HERO_BG} alt="" className="h-full w-full object-cover opacity-60" />
+        <img
+          src={HERO_BG}
+          alt=""
+          className="h-full w-full object-cover opacity-60"
+          fetchPriority="high"
+          decoding="async"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background/80" />
       </div>
 
@@ -23,7 +29,7 @@ export default function Hero() {
           className="reveal is-visible mx-auto max-w-2xl text-lg font-medium text-on-surface-variant"
           style={{ animationDelay: "220ms" }}
         >
-          A safe, fun, and engaging environment for your child's first steps. Our structured play
+          A safe, fun, and engaging environment for your child&apos;s first steps. Our structured play
           approach nurtures creativity, curiosity, and confidence in every little learner.
         </p>
 
