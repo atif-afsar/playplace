@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import LoginIllustration from "../../components/public/login/LoginIllustration";
 import LoginCard from "../../components/public/login/LoginCard";
+import { CREDITS } from "../../lib/contact";
 
 const CLOUDS = [
   { w: 128, h: 48, top: 40, delay: -2 },
@@ -46,7 +47,18 @@ export default function Login() {
         <div className="pointer-events-auto rounded-full border border-surface-variant bg-white/80 px-6 py-2 backdrop-blur-sm">
           <p className="text-sm font-bold text-on-surface-variant">
             © {new Date().getFullYear()} Play Place International School.{" "}
-            <span className="hidden md:inline">Powered by Bal Vatika.</span>
+            <span className="hidden md:inline">
+              Powered by{" "}
+              <a
+                href={CREDITS.poweredBy.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary transition-colors hover:underline"
+              >
+                {CREDITS.poweredBy.name}
+              </a>
+              .
+            </span>
           </p>
         </div>
       </footer>

@@ -21,9 +21,9 @@ const PALETTE = [
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-function StatCard({ icon, iconColor, label, value, sub, subColor = "text-on-surface-variant" }) {
-  return (
-    <div className="group cursor-default rounded-2xl border-2 border-surface-variant bg-surface-container-lowest p-6 shadow-[0_10px_30px_-5px_rgba(159,65,34,0.1)] transition-transform hover:scale-105">
+function StatCard({ icon, iconColor, label, value, sub, subColor = "text-on-surface-variant", to }) {
+  const inner = (
+    <>
       <div
         className={`mb-4 flex h-12 w-12 items-center justify-center rounded-full transition-transform group-hover:rotate-12 ${iconColor}`}
       >
@@ -34,7 +34,18 @@ function StatCard({ icon, iconColor, label, value, sub, subColor = "text-on-surf
       <p className="text-sm font-bold text-on-surface-variant">{label}</p>
       <p className="text-3xl font-black text-on-surface">{value}</p>
       {sub && <p className={`mt-2 text-xs font-bold ${subColor}`}>{sub}</p>}
-    </div>
+    </>
+  );
+
+  const className =
+    "group rounded-2xl border-2 border-surface-variant bg-surface-container-lowest p-6 shadow-[0_10px_30px_-5px_rgba(159,65,34,0.1)] transition-transform hover:scale-105";
+
+  return to ? (
+    <Link to={to} className={`${className} block cursor-pointer`}>
+      {inner}
+    </Link>
+  ) : (
+    <div className={`${className} cursor-default`}>{inner}</div>
   );
 }
 
@@ -168,6 +179,7 @@ export default function Dashboard() {
               label="Total Students"
               value={stats.totalStudents}
               sub="Currently enrolled"
+              to="/admin/students"
             />
             <StatCard
               icon="pending_actions"
@@ -176,6 +188,7 @@ export default function Dashboard() {
               value={stats.pending}
               sub={stats.pending ? "Requires review" : "All caught up"}
               subColor={stats.pending ? "text-primary" : "text-tertiary"}
+              to="/admin/admissions?status=pending"
             />
             <StatCard
               icon="task_alt"
@@ -184,6 +197,7 @@ export default function Dashboard() {
               value={stats.approved}
               sub="Ready to enroll"
               subColor="text-tertiary"
+              to="/admin/admissions?status=approved"
             />
             <StatCard
               icon="inbox"
@@ -191,6 +205,7 @@ export default function Dashboard() {
               label="Total Applications"
               value={stats.totalApplications}
               sub="All time"
+              to="/admin/admissions"
             />
           </section>
 

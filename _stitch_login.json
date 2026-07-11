@@ -1,0 +1,28 @@
+{
+    "id":  1,
+    "jsonrpc":  "2.0",
+    "result":  {
+                   "content":  [
+                                   {
+                                       "text":  "{\"name\":\"projects/3593362974696824108/screens/ffedee173ee847138b52589c0b04e331\",\"title\":\"Portal Login - Play Place\",\"screenshot\":{\"name\":\"projects/3593362974696824108/screens/ffedee173ee847138b52589c0b04e331/fileEntries/screenshot\",\"downloadUrl\":\"https://lh3.googleusercontent.com/aida/AP1WRLv8utNYB6EX69ux79O8tkdgQfskaCcsH_Z6O6af1WCq3WlABxumH1tEHGFciTLSXIq4lfwLord9h0XsZ4_tUJOrEV3FrQp79Yw9TN6LZw41g9ayQ8PyBQHO6FX8Qy9lA5RCG7F2YQyfIdYErPEG-YF4eXHXQR2nQ5txpCuDBwPKE2xJAZYUHSBxI2V3yF9SNa0ju3OTPXN49Rn__fYDOyh0tXh0NSyx7vPyEOy4HVGW8T_gVCdtr6pfqSo\"},\"htmlCode\":{\"name\":\"projects/3593362974696824108/screens/ffedee173ee847138b52589c0b04e331/fileEntries/html\",\"downloadUrl\":\"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzAwMDY1NjEzYzk3OWM1MDMwNzc5YTQ1N2E5MGVjYzgyEgsSBxClxtrgkBEYAZIBIwoKcHJvamVjdF9pZBIVQhMzNTkzMzYyOTc0Njk2ODI0MTA4\u0026filename=\u0026opi=89354086\",\"mimeType\":\"text/html\"},\"width\":\"2560\",\"height\":\"2048\",\"deviceType\":\"DESKTOP\"}",
+                                       "type":  "text"
+                                   }
+                               ],
+                   "structuredContent":  {
+                                             "deviceType":  "DESKTOP",
+                                             "height":  "2048",
+                                             "htmlCode":  {
+                                                              "downloadUrl":  "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzAwMDY1NjEzYzk3OWM1MDMwNzc5YTQ1N2E5MGVjYzgyEgsSBxClxtrgkBEYAZIBIwoKcHJvamVjdF9pZBIVQhMzNTkzMzYyOTc0Njk2ODI0MTA4\u0026filename=\u0026opi=89354086",
+                                                              "mimeType":  "text/html",
+                                                              "name":  "projects/3593362974696824108/screens/ffedee173ee847138b52589c0b04e331/fileEntries/html"
+                                                          },
+                                             "name":  "projects/3593362974696824108/screens/ffedee173ee847138b52589c0b04e331",
+                                             "screenshot":  {
+                                                                "downloadUrl":  "https://lh3.googleusercontent.com/aida/AP1WRLv8utNYB6EX69ux79O8tkdgQfskaCcsH_Z6O6af1WCq3WlABxumH1tEHGFciTLSXIq4lfwLord9h0XsZ4_tUJOrEV3FrQp79Yw9TN6LZw41g9ayQ8PyBQHO6FX8Qy9lA5RCG7F2YQyfIdYErPEG-YF4eXHXQR2nQ5txpCuDBwPKE2xJAZYUHSBxI2V3yF9SNa0ju3OTPXN49Rn__fYDOyh0tXh0NSyx7vPyEOy4HVGW8T_gVCdtr6pfqSo",
+                                                                "name":  "projects/3593362974696824108/screens/ffedee173ee847138b52589c0b04e331/fileEntries/screenshot"
+                                                            },
+                                             "title":  "Portal Login - Play Place",
+                                             "width":  "2560"
+                                         }
+               }
+}

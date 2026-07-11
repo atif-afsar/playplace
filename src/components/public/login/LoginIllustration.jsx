@@ -1,5 +1,4 @@
-const ILLUSTRATION =
-  "https://lh3.googleusercontent.com/aida/AP1WRLvObHZlMG-QmfgrwI97OHglxKaA0tkUAUaibiDtKfmA19a886jX2zBzJS44tCwkX4Z0HsyMzrm5nRsBJq4MQupTNSaY0K52AFi9ArXP8vv93JP_hvCMCTyvRyojc-AQ8nl8pdwJq6YOvIO_h91chc0dt9jjdIE1a0KkS2HlS5uD2D5N-kn3qDYNStcfRLOzgD7qd2O95vXw6leiebZlCXT-nddIYQa1aT4--y03J0qq1oVL8FlXijo06x0";
+const ILLUSTRATION = "/login-illustration.png";
 
 export default function LoginIllustration() {
   return (

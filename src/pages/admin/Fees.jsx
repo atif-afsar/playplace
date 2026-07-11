@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import AdminLayout from "../../components/admin/AdminLayout";
 import AdminModal from "../../components/admin/AdminModal";
 import SetupNotice from "../../components/admin/SetupNotice";
@@ -10,6 +11,7 @@ const STATUS_FILTERS = ["All", "due", "overdue", "paid"];
 const EMPTY = { student_id: "", title: "Term Fee", amount: "", due_date: "", status: "due" };
 
 export default function Fees() {
+  const [searchParams] = useSearchParams();
   const [rows, setRows] = useState([]);
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,6 +45,11 @@ export default function Fees() {
     }
     load();
   }, [load]);
+
+  useEffect(() => {
+    const status = searchParams.get("status");
+    if (status && STATUS_FILTERS.includes(status)) setStatusFilter(status);
+  }, [searchParams]);
 
   const set = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 

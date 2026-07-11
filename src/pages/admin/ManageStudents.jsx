@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import AdminLayout from "../../components/admin/AdminLayout";
 import AdminModal from "../../components/admin/AdminModal";
 import SetupNotice from "../../components/admin/SetupNotice";
@@ -19,6 +20,7 @@ const EMPTY = {
 };
 
 export default function ManageStudents() {
+  const [searchParams] = useSearchParams();
   const [rows, setRows] = useState([]);
   const [parents, setParents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -52,6 +54,11 @@ export default function ManageStudents() {
     }
     load();
   }, [load]);
+
+  useEffect(() => {
+    const q = searchParams.get("q");
+    if (q) setSearch(q);
+  }, [searchParams]);
 
   const parentName = useCallback(
     (id) => {

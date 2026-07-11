@@ -247,6 +247,25 @@ create table if not exists public.notices (
   created_at timestamptz not null default now()
 );
 
+-- ---------- SCHOOL CALENDAR (events) ----------
+create table if not exists public.events (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  description text,
+  event_date date not null,
+  end_date date,
+  event_type text not null default 'event'
+    check (event_type in ('event', 'holiday', 'term_start', 'term_end', 'exam', 'closure')),
+  location text,
+  target_class text not null default 'all',
+  school_year text not null,
+  created_at timestamptz not null default now(),
+  check (end_date is null or end_date >= event_date)
+);
+
+create index if not exists events_event_date_idx on public.events (event_date);
+create index if not exists events_school_year_idx on public.events (school_year);
+
 -- ============================================================
 --  Helper functions (SECURITY DEFINER so RLS subqueries are simple + safe)
 -- ============================================================
@@ -280,6 +299,7 @@ alter table public.results enable row level security;
 alter table public.attendance enable row level security;
 alter table public.fees enable row level security;
 alter table public.notices enable row level security;
+alter table public.events enable row level security;
 
 -- ----- timetable: admin full, parent reads own child's class -----
 drop policy if exists "timetable: admin all" on public.timetable;
@@ -335,6 +355,22 @@ drop policy if exists "notices: parent read" on public.notices;
 create policy "notices: parent read"
   on public.notices for select
   using (target_class = 'all' or target_class in (select public.parent_classes()));
+
+-- ----- events: admin full, public reads school-wide, parents also see class events -----
+drop policy if exists "events: admin all" on public.events;
+create policy "events: admin all"
+  on public.events for all
+  using (public.is_admin()) with check (public.is_admin());
+
+drop policy if exists "events: public read" on public.events;
+create policy "events: public read"
+  on public.events for select
+  using (target_class = 'all');
+
+drop policy if exists "events: parent read class" on public.events;
+create policy "events: parent read class"
+  on public.events for select
+  using (target_class in (select public.parent_classes()));
 
 -- ============================================================
 --  AFTER RUNNING: make yourself an admin

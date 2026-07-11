@@ -16,17 +16,30 @@ import AdminResults from "../pages/admin/Results";
 import AdminTimetable from "../pages/admin/Timetable";
 import AdminFees from "../pages/admin/Fees";
 import AdminNotices from "../pages/admin/Notices";
+import AdminCalendar from "../pages/admin/Calendar";
 import ParentDashboard from "../pages/parent/Dashboard";
 import ViewTimetable from "../pages/parent/ViewTimetable";
 import ViewResults from "../pages/parent/ViewResults";
 import FeeStatus from "../pages/parent/FeeStatus";
 import ParentNotices from "../pages/parent/Notices";
+import ParentCalendar from "../pages/parent/Calendar";
+import PublicCalendar from "../pages/public/Calendar";
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
+    if (hash) {
+      const id = hash.replace("#", "");
+      const scrollToTarget = () => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
+      scrollToTarget();
+      const t = setTimeout(scrollToTarget, 150);
+      return () => clearTimeout(t);
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
   return null;
 }
 
@@ -39,6 +52,7 @@ export default function AppRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/admissions" element={<Admissions />} />
         <Route path="/academics" element={<Academics />} />
+        <Route path="/calendar" element={<PublicCalendar />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
@@ -112,6 +126,14 @@ export default function AppRoutes() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/admin/calendar"
+          element={
+            <ProtectedRoute role="admin">
+              <AdminCalendar />
+            </ProtectedRoute>
+          }
+        />
 
         {/* Parent (role-guarded) */}
         <Route path="/parent" element={<Navigate to="/parent/dashboard" replace />} />
@@ -152,6 +174,14 @@ export default function AppRoutes() {
           element={
             <ProtectedRoute role="parent">
               <ParentNotices />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/parent/calendar"
+          element={
+            <ProtectedRoute role="parent">
+              <ParentCalendar />
             </ProtectedRoute>
           }
         />

@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import AdminNotifications from "./AdminNotifications";
+import { CREDITS } from "../../lib/contact";
 
 const NAV = [
   { label: "Dashboard", icon: "dashboard", to: "/admin/dashboard" },
@@ -11,6 +13,7 @@ const NAV = [
   { label: "Timetable", icon: "calendar_month", to: "/admin/timetable" },
   { label: "Fees", icon: "payments", to: "/admin/fees" },
   { label: "Notices", icon: "campaign", to: "/admin/notices" },
+  { label: "Calendar", icon: "event", to: "/admin/calendar" },
 ];
 
 function SidebarContent({ profile, onSignOut, onNavigate }) {
@@ -85,10 +88,18 @@ export default function AdminLayout({ title, breadcrumb, description, actions, c
   const { profile, signOut } = useAuth();
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSignOut = async () => {
     await signOut();
     navigate("/login");
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const q = searchQuery.trim();
+    if (!q) return;
+    navigate(`/admin/admissions?q=${encodeURIComponent(q)}`);
   };
 
   return (
@@ -122,24 +133,21 @@ export default function AdminLayout({ title, breadcrumb, description, actions, c
             >
               <span className="material-symbols-outlined">menu</span>
             </button>
-            <div className="relative hidden md:block">
+            <form onSubmit={handleSearch} className="relative hidden md:block">
               <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">
                 search
               </span>
               <input
-                type="text"
+                type="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search students, fees, or events..."
                 className="w-80 rounded-full border-2 border-outline-variant bg-surface-container-low py-2 pl-12 pr-4 text-base outline-none transition-all focus:border-primary"
               />
-            </div>
+            </form>
           </div>
           <div className="flex items-center gap-6">
-            <div className="relative cursor-pointer">
-              <span className="material-symbols-outlined text-2xl text-on-surface-variant">
-                notifications
-              </span>
-              <span className="absolute right-0 top-0 h-3 w-3 rounded-full border-2 border-surface bg-error" />
-            </div>
+            <AdminNotifications />
             <div className="flex items-center gap-3 border-l-2 border-outline-variant pl-6">
               <div className="text-right">
                 <p className="text-sm font-bold text-on-surface">{profile?.full_name || "Admin"}</p>
@@ -182,15 +190,24 @@ export default function AdminLayout({ title, breadcrumb, description, actions, c
 
         <footer className="mt-auto flex flex-col items-center justify-between gap-4 border-t-2 border-outline-variant bg-surface-container-low px-6 py-6 md:flex-row">
           <p className="text-base font-medium text-on-surface-variant">
-            © {new Date().getFullYear()} Play Place International School. Powered by Bal Vatika.
+            © {new Date().getFullYear()} Play Place International School. Powered by{" "}
+            <a
+              href={CREDITS.poweredBy.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-primary transition-colors hover:underline"
+            >
+              {CREDITS.poweredBy.name}
+            </a>
+            .
           </p>
           <div className="flex gap-6">
-            <a href="#" className="font-bold text-on-surface-variant transition-colors hover:text-primary">
+            <Link to="/contact" className="font-bold text-on-surface-variant transition-colors hover:text-primary">
               Privacy Policy
-            </a>
-            <a href="#" className="font-bold text-on-surface-variant transition-colors hover:text-primary">
+            </Link>
+            <Link to="/contact" className="font-bold text-on-surface-variant transition-colors hover:text-primary">
               Support
-            </a>
+            </Link>
           </div>
         </footer>
       </main>

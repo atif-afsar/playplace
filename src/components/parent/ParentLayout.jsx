@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { CREDITS } from "../../lib/contact";
 
 const NAV = [
   { label: "Dashboard", icon: "dashboard", to: "/parent/dashboard" },
@@ -8,6 +9,7 @@ const NAV = [
   { label: "Results", icon: "grade", to: "/parent/results" },
   { label: "Fees", icon: "payments", to: "/parent/fees" },
   { label: "Notices", icon: "campaign", to: "/parent/notices" },
+  { label: "Calendar", icon: "event", to: "/parent/calendar" },
 ];
 
 export default function ParentLayout({ children }) {
@@ -121,7 +123,16 @@ export default function ParentLayout({ children }) {
       <footer className="mt-auto border-t-2 border-surface-variant bg-surface-container-low">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center justify-between gap-4 px-6 py-6 md:flex-row">
           <p className="text-base font-medium text-on-surface-variant">
-            © {new Date().getFullYear()} Play Place International School. Powered by Bal Vatika.
+            © {new Date().getFullYear()} Play Place International School. Powered by{" "}
+            <a
+              href={CREDITS.poweredBy.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-primary transition-colors hover:underline"
+            >
+              {CREDITS.poweredBy.name}
+            </a>
+            .
           </p>
           <div className="flex gap-6">
             <NavLink to="/contact" className="font-bold text-on-surface-variant transition-colors hover:text-primary">

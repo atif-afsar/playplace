@@ -1,14 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import AdminLayout from "../../components/admin/AdminLayout";
 import StatusBadge from "../../components/common/StatusBadge";
 import SetupNotice from "../../components/admin/SetupNotice";
 import { supabase, isSupabaseConfigured } from "../../lib/supabaseClient";
+import { CLASS_OPTIONS } from "../../lib/constants";
 
-const CLASS_OPTIONS = ["All Classes", "Playgroup", "Nursery", "Kindergarten 1", "Kindergarten 2"];
+const CLASS_FILTERS = ["All Classes", ...CLASS_OPTIONS];
 const STATUS_OPTIONS = ["All Status", "pending", "approved", "rejected"];
 const AVATAR_BG = ["bg-primary-fixed text-on-primary-fixed", "bg-tertiary-fixed text-on-tertiary-fixed", "bg-secondary-fixed text-on-secondary-fixed", "bg-surface-variant text-on-surface-variant"];
 
 export default function ManageAdmissions() {
+  const [searchParams] = useSearchParams();
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -37,6 +40,13 @@ export default function ManageAdmissions() {
     fetchRows();
   }, []);
 
+  useEffect(() => {
+    const q = searchParams.get("q");
+    const status = searchParams.get("status");
+    if (q) setSearch(q);
+    if (status && STATUS_OPTIONS.includes(status)) setStatusFilter(status);
+  }, [searchParams]);
+
   const filtered = useMemo(() => {
     return rows.filter((r) => {
       const matchesSearch =
@@ -63,7 +73,6 @@ export default function ManageAdmissions() {
   // parent account by email). Rejecting deactivates any enrolled record.
   const syncEnrollment = async (admission, status) => {
     if (status === "approved") {
-      // Enroll only once per admission.
       const { data: existing } = await supabase
         .from("students")
         .select("id")
@@ -81,12 +90,13 @@ export default function ManageAdmissions() {
       }
 
       if (existing) {
-        await supabase
+        const { error } = await supabase
           .from("students")
           .update({ status: "active", parent_id: parentId })
           .eq("id", existing.id);
+        if (error) throw new Error(error.message);
       } else {
-        await supabase.from("students").insert({
+        const { error } = await supabase.from("students").insert({
           full_name: admission.child_name,
           dob: admission.dob,
           gender: admission.gender,
@@ -96,12 +106,14 @@ export default function ManageAdmissions() {
           photo_url: admission.photo_url,
           status: "active",
         });
+        if (error) throw new Error(error.message);
       }
     } else if (status === "rejected") {
-      await supabase
+      const { error } = await supabase
         .from("students")
         .update({ status: "inactive" })
         .eq("admission_id", admission.id);
+      if (error) throw new Error(error.message);
     }
   };
 
@@ -173,7 +185,7 @@ export default function ManageAdmissions() {
               />
             </div>
             <div className="flex gap-4">
-              <FilterSelect value={classFilter} onChange={setClassFilter} options={CLASS_OPTIONS} />
+              <FilterSelect value={classFilter} onChange={setClassFilter} options={CLASS_FILTERS} />
               <FilterSelect
                 value={statusFilter}
                 onChange={setStatusFilter}

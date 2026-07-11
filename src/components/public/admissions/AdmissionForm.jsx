@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import Reveal from "../../common/Reveal";
 import { supabase, isSupabaseConfigured } from "../../../lib/supabaseClient";
 import { useAuth } from "../../../context/AuthContext";
-
-const CLASSES = ["Nursery", "LKG", "UKG", "Pre-K", "Kindergarten", "Grade 1", "Grade 2"];
+import { CLASS_OPTIONS } from "../../../lib/constants";
 
 const EMPTY = {
   childName: "",
@@ -207,7 +206,7 @@ export default function AdmissionForm() {
                 onChange={set("classApplied")}
                 className="form-input"
               >
-                {CLASSES.map((c) => (
+                {CLASS_OPTIONS.map((c) => (
                   <option key={c} value={c}>
                     {c}
                   </option>

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const HERO_BG =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuCMFwh-O-Zb5uxYO4PxJn-1TnagGsCo4owjTPkg3cdqvGOscLhcLbXwneUI90VH4sRs5cgI6ClkXT5nabaTtnjzGh9ftEmSheipgDjwbEKG4Ksd1O2ufhgv4mcvdICYeNdINBzXyy85I90gHRouyGW8GM3hhkMkrMdoCgeQBj-gMHjhXAqYYyqCFXP1Jp43konawgLv_aG1Ms02fPsWO3hNauqcX3vBRDAyEogNQHe90PrmtkfvHAAZ";
 
@@ -29,13 +31,21 @@ export default function Hero() {
           className="reveal is-visible flex flex-col items-center justify-center gap-4 pt-4 sm:flex-row"
           style={{ animationDelay: "360ms" }}
         >
-          <button className="bouncy-button rounded-full bg-primary px-10 py-5 text-xl font-bold text-white transition-all hover:scale-105">
+          <Link
+            to="/admissions#apply-form"
+            className="bouncy-button rounded-full bg-primary px-10 py-5 text-xl font-bold text-white transition-all hover:scale-105"
+          >
             Apply Now
-          </button>
-          <button className="flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-on-surface-variant transition-all hover:bg-surface-variant/40">
+          </Link>
+          <a
+            href="https://www.instagram.com/playplaceinternational_.school/reels/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold text-on-surface-variant transition-all hover:bg-surface-variant/40"
+          >
             <span className="material-symbols-outlined">play_circle</span>
             Take a Virtual Tour
-          </button>
+          </a>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const LOGO =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuAiU5CaOI8gKKTDE_fw1t9z6JtA9C1vN5ppyD8TG6ocmk2fGq1Fv5TQ72N2UvvmbCQdYNEQsplkiGKS7gfff1UyAOlP6nzMOP5Iic9N4KYg8wzOBpbhe0fAm6c44cVsCdAaXGVDX3qOYL6iyIPUuETI-97P3fAu_FzpiV6YfQKhrY8xWpkrr--6Ea79mP6vQxenhGhyZiRCpPJqMqHfBG2XNamNiqYlcGIaJ898PcOHdFXHKlx3mSTAcpq982EcPTIn1Q";
@@ -10,6 +10,7 @@ const LINKS = [
   { label: "About", to: "/about" },
   { label: "Admissions", to: "/admissions" },
   { label: "Academics", to: "/academics" },
+  { label: "Calendar", to: "/calendar" },
   { label: "Gallery", to: "/gallery" },
   { label: "Contact", to: "/contact" },
   { label: "Login", to: "/login" },
@@ -70,9 +71,12 @@ export default function Navbar() {
       <nav className="hidden items-center gap-6 md:flex">{LINKS.map((l) => renderLink(l))}</nav>
 
       <div className="flex items-center gap-3">
-        <button className="bouncy-button hidden rounded-full bg-primary px-6 py-2 text-sm font-bold text-white transition-all hover:scale-105 sm:block">
+        <Link
+          to="/admissions#apply-form"
+          className="bouncy-button hidden rounded-full bg-primary px-6 py-2 text-sm font-bold text-white transition-all hover:scale-105 sm:block"
+        >
           Admissions Open
-        </button>
+        </Link>
         <button
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"

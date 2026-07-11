@@ -29,6 +29,40 @@ export default function LoginCard() {
     setIsError(false);
   };
 
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    setNotice("");
+    setIsError(false);
+
+    if (!isConfigured) {
+      setIsError(true);
+      setNotice("Supabase isn't configured yet. Add your keys to .env and restart the dev server.");
+      return;
+    }
+
+    const target = email.trim();
+    if (!target) {
+      setIsError(true);
+      setNotice("Enter your email above, then click Forgot password.");
+      return;
+    }
+
+    setLoading(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(target, {
+      redirectTo: `${window.location.origin}/login`,
+    });
+    setLoading(false);
+
+    if (error) {
+      setIsError(true);
+      setNotice(error.message);
+      return;
+    }
+
+    setIsError(false);
+    setNotice("Password reset link sent. Check your email inbox.");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setNotice("");
@@ -203,9 +237,13 @@ export default function LoginCard() {
                   Remember me
                 </span>
               </label>
-              <a href="#" className="text-sm font-bold text-primary hover:underline">
+              <button
+                type="button"
+                onClick={handleForgotPassword}
+                className="text-sm font-bold text-primary hover:underline"
+              >
                 Forgot password?
-              </a>
+              </button>
             </div>
           )}
 
