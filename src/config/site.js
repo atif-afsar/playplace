@@ -33,7 +33,7 @@ export const CONTACT = {
   },
   email: "playplaceinternationalschool4@gmail.com",
   phones: ["073029 88040"], // display format; links dial +91 7302988040
-  hours: "Monday to Saturday, 10 AM to 5 PM (IST)",
+  hours: "Monday to Saturday, 8 AM to 2 PM (IST)",
   mapsUrl: "https://www.google.com/maps/place/Monarch+Apartments/@27.9426475,78.078355,17z",
   mapsEmbedUrl:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3524.6736772300032!2d78.078355!3d27.942647499999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3974a5d163f6ac03%3A0xf1381933a058afe2!2sMonarch%20Apartments!5e0!3m2!1sen!2sin!4v1783668756724!5m2!1sen!2sin",

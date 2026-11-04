@@ -51,8 +51,8 @@ function schoolNode() {
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        opens: "10:00",
-        closes: "17:00",
+        opens: "08:00",
+        closes: "14:00",
       },
     ],
     areaServed: { "@type": "City", name: "Aligarh" },

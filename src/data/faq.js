@@ -46,7 +46,7 @@ export const PARENT_FAQ = [
   },
   {
     q: "What are the school timings for visits and enquiries?",
-    a: "You can call or visit us Monday to Saturday, 10 AM to 5 PM (IST).",
+    a: "You can call or visit us Monday to Saturday, 8 AM to 2 PM (IST).",
   },
   {
     q: "How do I apply for admission?",
