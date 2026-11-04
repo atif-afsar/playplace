@@ -1,0 +1,78 @@
+/**
+ * The eight pillars of the Play Place franchise ecosystem.
+ * REVIEW: curriculum alignment wording (EYFS/NEP) is deliberately not claimed.
+ */
+export const PILLARS = [
+  {
+    id: "curriculum",
+    number: 1,
+    title: "Curriculum & Pedagogy",
+    icon: "menu_book",
+    color: "pink",
+    summary: "A structured, play-based curriculum designed for each age group.",
+    points: ["Age-appropriate learning goals", "A consistent teaching approach", "Term-wise curriculum planning"],
+  },
+  {
+    id: "resources",
+    number: 2,
+    title: "Learning Resources",
+    icon: "auto_stories",
+    color: "green",
+    summary: "Ready-to-use materials so teachers can focus on children.",
+    points: ["Lesson plans and activity guides", "Worksheets and learning materials", "Teaching kits"],
+  },
+  {
+    id: "technology",
+    number: 3,
+    title: "Technology Support",
+    icon: "devices",
+    color: "lilac",
+    summary: "Planned digital tools to make teaching and administration simpler.",
+    points: ["Digital teaching resources", "Simpler school administration", "Easier parent communication"],
+  },
+  {
+    id: "training",
+    number: 4,
+    title: "Training & Capacity Building",
+    icon: "school",
+    color: "yellow",
+    summary: "Training for founders, teachers and staff in the Play Place way.",
+    points: ["Founder orientation", "Teacher training", "Staff guidance"],
+  },
+  {
+    id: "branding",
+    number: 5,
+    title: "Branding & Marketing",
+    icon: "campaign",
+    color: "pink",
+    summary: "A trusted brand and practical marketing support for your area.",
+    points: ["Brand guidelines and designs", "Campaign material", "Local promotion guidance"],
+  },
+  {
+    id: "infrastructure",
+    number: 6,
+    title: "Infrastructure & Setup",
+    icon: "foundation",
+    color: "blue",
+    summary: "Guidance to create a safe, bright, child-friendly centre.",
+    points: ["Classroom and layout planning", "Furniture and play equipment", "Child-safety guidance"],
+  },
+  {
+    id: "quality",
+    number: 7,
+    title: "Quality Assurance",
+    icon: "verified",
+    color: "green",
+    summary: "Regular checks and feedback so every centre keeps improving.",
+    points: ["Academic and operational audits", "Structured feedback", "Ongoing monitoring"],
+  },
+  {
+    id: "operations",
+    number: 8,
+    title: "Operations & SOPs",
+    icon: "assignment",
+    color: "lilac",
+    summary: "Clear procedures for running a preschool day to day.",
+    points: ["Admissions and onboarding", "HR and staffing", "Finance and compliance"],
+  },
+];

@@ -1,16 +1,22 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import './index.css'
-import App from './App.jsx'
-import { AuthProvider } from './context/AuthContext.jsx'
+import { StrictMode } from "react";
+import { createRoot, hydrateRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import "./index.css";
+import App from "./App.jsx";
 
-createRoot(document.getElementById('root')).render(
+// Enables scroll-reveal styles only when JS is running (content stays visible otherwise).
+document.documentElement.classList.add("js-reveal");
+
+const container = document.getElementById("root");
+const app = (
   <StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
+      <App />
     </BrowserRouter>
-  </StrictMode>,
-)
+  </StrictMode>
+);
+
+// Production pages are pre-rendered (scripts/prerender.mjs) → hydrate that HTML.
+// In `npm run dev` the root is empty → render normally.
+if (container.hasChildNodes()) hydrateRoot(container, app);
+else createRoot(container).render(app);

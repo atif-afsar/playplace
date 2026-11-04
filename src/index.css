@@ -1,277 +1,156 @@
 @import "tailwindcss";
 
-/* ---- Design tokens (from Stitch "Play Place Homepage") ---- */
+/*
+ * Play Place design tokens — playful, rounded, pastel.
+ * Navy + coral red + green + yellow come from the official logo.
+ */
 @theme {
-  --font-sans: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Nunito", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fredoka", "Nunito", ui-sans-serif, sans-serif;
 
-  --color-background: #f7f9ff;
-  --color-surface: #f7f9ff;
-  --color-surface-variant: #d1e4fb;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #edf4ff;
-  --color-surface-container: #e3efff;
-  --color-surface-container-high: #d9eaff;
-  --color-surface-container-highest: #d1e4fb;
-  --color-surface-dim: #c9dcf3;
+  --color-navy: #142d55;
+  --color-navy-deep: #0e2142;
+  --color-blue: #1f6fb2;
+  --color-coral: #e5483b;
+  --color-coral-dark: #c93427;
+  --color-green: #5fb236;
+  --color-green-ink: #3b7a17;
+  --color-yellow: #f8c63d;
+  --color-ink: #2b3a4f;
+  --color-muted: #637085;
+  --color-line: #e6ebf1;
 
-  --font-display: "Fredoka", "Nunito Sans", ui-sans-serif, sans-serif;
-  --color-on-background: #091d2e;
-  --color-on-surface: #091d2e;
-  --color-on-surface-variant: #56423c;
-  --color-on-tertiary-container: #004a18;
+  /* Pastels */
+  --color-pink-soft: #fdeef0;
+  --color-green-soft: #eef8e4;
+  --color-lilac-soft: #f5edfc;
+  --color-yellow-soft: #fff6dc;
+  --color-blue-soft: #eaf5fb;
+  --color-cream: #fffbf4;
 
-  --color-primary: #9f4122;
-  --color-primary-dark: #7f2a0d;
-  --color-primary-container: #ff8a65;
-  --color-primary-fixed: #ffdbd0;
-  --color-on-primary-container: #752305;
+  /* Highlighter marks */
+  --color-mark-blue: #ccecf8;
+  --color-mark-green: #dcf2c4;
+  --color-mark-yellow: #ffe9a8;
 
-  --color-secondary: #686000;
-  --color-secondary-container: #f0e269;
-  --color-secondary-fixed: #f3e56c;
-  --color-secondary-fixed-dim: #d6c953;
-  --color-on-secondary-container: #6d6400;
+  --shadow-soft: 0 2px 6px rgb(20 45 85 / 0.04), 0 14px 34px -18px rgb(20 45 85 / 0.22);
+  --shadow-lift: 0 4px 10px rgb(20 45 85 / 0.06), 0 26px 50px -24px rgb(20 45 85 / 0.35);
 
-  --color-tertiary: #286b33;
-  --color-tertiary-container: #75ba78;
-  --color-tertiary-fixed: #abf4ac;
-  --color-tertiary-fixed-dim: #90d792;
-  --color-on-tertiary: #ffffff;
-  --color-on-tertiary-fixed: #002107;
-  --color-on-tertiary-fixed-variant: #07521d;
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-float: float 5s ease-in-out infinite;
+  --animate-float-slow: float 7s ease-in-out infinite;
+  --animate-spin-slow: spin 16s linear infinite;
+  --animate-kenburns: kenburns 18s ease-out both;
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-pop: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 
-  --color-on-primary: #ffffff;
-  --color-on-primary-fixed: #3a0b00;
-  --color-on-secondary: #ffffff;
-  --color-on-secondary-fixed: #1f1c00;
-
-  --color-error: #ba1a1a;
-  --color-error-container: #ffdad6;
-  --color-on-error: #ffffff;
-  --color-on-error-container: #93000a;
-
-  --color-outline-variant: #ddc0b8;
-  --color-outline: #89726b;
-}
-
-/* ---- Base ---- */
-body {
-  font-family: var(--font-sans);
-  background-color: var(--color-background);
-  color: var(--color-on-background);
-}
-
-.material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
-  user-select: none;
-}
-
-/* ---- Component styles carried over from the Stitch design ---- */
-.bouncy-button {
-  transition: transform 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-    box-shadow 0.18s ease;
-  box-shadow: 0 4px 0 var(--color-primary-dark);
-}
-.bouncy-button:hover {
-  transform: translateY(-2px);
-}
-.bouncy-button:active {
-  transform: translateY(4px);
-  box-shadow: 0 0 0 var(--color-primary-dark);
-}
-
-.cloud-card {
-  border: 2px solid var(--color-surface-variant);
-  box-shadow: 0 10px 25px -5px rgba(159, 65, 34, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.cloud-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 18px 34px -8px rgba(159, 65, 34, 0.16);
-}
-
-.card-glow {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.card-glow:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 20px rgba(163, 222, 254, 0.4);
-}
-
-.glass-nav {
-  backdrop-filter: blur(12px);
-  background: rgba(247, 249, 255, 0.9);
-}
-
-.gallery-mask {
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 6%,
-    black 94%,
-    transparent
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 6%,
-    black 94%,
-    transparent
-  );
-}
-
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* ---- Minimal animations ---- */
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(3deg); }
+  }
+  @keyframes kenburns {
+    from { transform: scale(1.12); }
+    to { transform: scale(1); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes pop {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
   }
 }
 
-@keyframes float-slow {
-  0%,
-  100% {
-    transform: translateY(0);
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
-  50% {
-    transform: translateY(-18px);
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    overflow-wrap: break-word; /* long emails / handles never push the layout wider */
   }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-navy);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--color-yellow); color: var(--color-navy); }
+  :focus-visible {
+    outline: 3px solid var(--color-blue);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+  [id] { scroll-margin-top: 6rem; }
 }
 
-@keyframes wiggle {
-  0%,
-  100% {
-    transform: rotate(-4deg);
-  }
-  50% {
-    transform: rotate(4deg);
-  }
+/* Highlighter mark behind heading words */
+.mark {
+  color: inherit;
+  background: linear-gradient(transparent 56%, var(--mark, var(--color-mark-blue)) 56%, var(--mark, var(--color-mark-blue)) 90%, transparent 90%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0 0.08em;
 }
-
-/* Scroll-reveal: hidden until .is-visible is added by the observer */
-.reveal {
-  opacity: 0;
-}
-.reveal.is-visible {
-  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.animate-float {
-  animation: float-slow 6s ease-in-out infinite;
-}
-.animate-float-delayed {
-  animation: float-slow 7s ease-in-out infinite;
-  animation-delay: 1.5s;
-}
-.animate-wiggle {
-  animation: wiggle 3s ease-in-out infinite;
-  transform-origin: center;
-}
-
-@keyframes morph {
-  0% {
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  }
-  50% {
-    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-  }
-  100% {
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  }
-}
-
-.bubble-shape {
-  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  animation: morph 8s ease-in-out infinite;
-}
+.mark-green { --mark: var(--color-mark-green); }
+.mark-yellow { --mark: var(--color-mark-yellow); }
+.mark-light { --mark: rgb(220 242 196 / 0.45); }
 
 @layer components {
-  .form-input {
-    @apply rounded-2xl border-2 border-outline-variant p-4 text-base font-medium text-on-background outline-none transition-colors focus:border-secondary;
-  }
+/* Icon font (Material Symbols Rounded, subset in index.html) */
+.icon {
+  font-family: "Material Symbols Rounded";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.5rem;
+  line-height: 1;
+  display: inline-block;
+  white-space: nowrap;
+  direction: ltr;
+  user-select: none;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  -webkit-font-smoothing: antialiased;
+}
+.icon::before {
+  content: attr(data-icon);
+  font-feature-settings: "liga";
+}
+.icon-fill { font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24; }
 }
 
-.form-input::placeholder {
-  color: var(--color-outline);
-  opacity: 1;
-  font-weight: 500;
+/* Scroll reveal — content stays visible without JS */
+.js-reveal .reveal:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(24px);
 }
+.js-reveal .reveal.is-visible { animation: var(--animate-fade-up); }
+
+/* Marquee pauses on hover/focus */
+.marquee-track:hover,
+.marquee-track:focus-within { animation-play-state: paused; }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal,
-  .reveal.is-visible,
-  .animate-float,
-  .animate-float-delayed,
-  .animate-wiggle,
-  .bubble-shape,
-  .floating-envelope,
-  .login-cloud {
-    animation: none;
-    opacity: 1;
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
+  .js-reveal .reveal:not(.is-visible) { opacity: 1; transform: none; }
+  .marquee-track { animation: none !important; }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Gallery */
-.lightbox-bg {
-  backdrop-filter: blur(12px);
-  background-color: rgba(9, 29, 46, 0.6);
-}
-.image-zoom:hover img {
-  transform: scale(1.1);
-}
-
-/* Contact */
-.floating-envelope {
-  animation: float-envelope 3s ease-in-out infinite;
-}
-@keyframes float-envelope {
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-15px) rotate(5deg);
-  }
-}
-
-/* Login clouds */
-.login-cloud {
-  position: absolute;
-  border-radius: 50px;
-  background: white;
-  opacity: 0.6;
-  animation: cloud-drift 20s linear infinite;
-}
-@keyframes cloud-drift {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(100vw);
-  }
-}
-
-.font-display {
-  font-family: var(--font-display);
+@media print {
+  .js-reveal .reveal { opacity: 1 !important; transform: none !important; animation: none !important; }
 }

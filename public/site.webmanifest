@@ -1,0 +1,13 @@
+{
+  "name": "Play Place International School",
+  "short_name": "Play Place",
+  "description": "Play-based preschool in Aligarh for Playgroup, Nursery, LKG and UKG.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#142d55",
+  "icons": [
+    { "src": "/favicon.png", "sizes": "100x100", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "100x100", "type": "image/png" }
+  ]
+}

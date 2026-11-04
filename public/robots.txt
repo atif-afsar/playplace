@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /parent/
-Disallow: /login
 
 Sitemap: https://www.theplayplace.in/sitemap.xml
